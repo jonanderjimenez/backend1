@@ -1,0 +1,14 @@
+{
+  "name": "backend1",
+  "version": "1.0.0",
+  "description": "bezeroen kudeaketa",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Ander",
+  "license": "ISC",
+  "dependencies": {
+    "expres": "^0.0.5"
+  }
+}
