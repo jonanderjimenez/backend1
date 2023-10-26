@@ -1,12 +1,91 @@
 <!DOCTYPE html>
-2 <html lang="en">
-3 <head>
-4<meta charset="UTF-8">
+ <html lang="en">
+ <head>
+<meta charset="UTF-8">
  <title>POST metodoa erabiltzen duen inprimakia</title>
+ <script>
+
+    // see Constraint Validation API 
+    // https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation
+
+    let check = () => {
+        
+        let bidaltzekoOK = true;
+        
+        let izena = document.getElementById("izena");
+
+        let emaila = document.getElementById("email");
+        let email=emaila.value;
+
+        let password = document.getElementById("password").value;
+
+        let confirmpassworda = document.getElementById("confirmpassword");
+        let confirmpassword=confirmpassworda.value;
+
+        
+        let citya= document.getElementById("city");
+        let city=citya.value
+
+        let zipcodea= document.getElementById("zipcode");
+        let zipcode=zipcodea.value
+        
+        let emailregex = /[a-zA-Z0-9]+@[a-zA-Z0-9.-]+$/;
+        if (!emailregex.test(email)) {
+            emaila.setCustomValidity("@ falta da, mesedez jarri email zuzen bat");
+            bidaltzekoOK=false;
+        } 
+        if(password!=confirmpassword){
+             confirmpassworda.setCustomValidity("Passwords do not match");
+             bidaltzekoOK=false;
+        }
+        if(length(city)<3){
+            citya.setCustomValidity("City name must be at least 3 characters long");
+            bidaltzekoOK=false;
+        }
+        let zipcoderegex=/[0-9]+$/;
+        if(zipcoderegex.test(zipcode)){
+            zipcodea.setCustomValidity("Zipcode must be a number");
+            bidaltzekoOK=false;
+        }
+
+        return bidaltzekoOK;
+    }
+
+    window.onload = () => {
+        document.getElementById("izena").oninput = check;
+        document.getElementById("email").oninput = check;
+        document.getElementById("confirmpassword").oninput = check;
+        document.getElementById("city").oninput = check;
+        document.getElementById("zipcode").oninput = check;
+
+        document.querySelector("#formularioa").addEventListener("submit", (e) => {
+            e.preventDefault();
+     //       if (check()) e.target.submit();
+        });
+
+    };
+</script>
 </head>
  <body>
-<form action="/bezeroa" method="POST">
-Izena: <input type="text" name="izena"><input,! type="submit" value="Bidali">
+<form action="/" method="POST">
+Izena: <input type="text" name="izena" id="izena" required><br>
+Email: <input type="text" name="email" id="email" required><br>
+Password: <input type="password" name="password" id="password" required><br>
+Confirm Password: <input type="password" name="confirmpassword"id="confirmpassword" required><br>
+Gender:
+<select name="gender" id="gender">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Non-binary">Non-binary</option>
+</select><br>
+Date of birth: <input type="date" name="birthdate" id="birthdate" required><br>
+Address: <textarea name="address" rows="3" id="address" cols="50"></textarea><br>
+City: <input type="text" name="city" id="city" required><br>
+Zip Code: <input type="number" name="zipcode" id="zipcode" required><br>
+I agree to the terms conditions:<input type="checkbox" name="terms" value="yes" required><br>
+
+<input type="submit" value="Bidali">
+
 </form>
 </body>
 </html>

@@ -9,6 +9,8 @@
   "author": "Jon Ander",
   "license": "ISC",
   "dependencies": {
-    "expres": "^0.0.5"
+    "expres": "^0.0.5",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
   }
 }
